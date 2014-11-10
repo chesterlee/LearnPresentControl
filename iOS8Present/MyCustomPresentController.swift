@@ -11,7 +11,10 @@ import UIKit
 class MyCustomPresentController: UIPresentationController {
    
     
-    lazy var dimmingView :UIView = {
+    lazy var backgroundView :UIView = {
+
+        // containerView是presented和presenting的view的容器
+        
         let view = UIView(frame: self.containerView!.bounds)
         view.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
         view.alpha = 0.0
@@ -19,52 +22,56 @@ class MyCustomPresentController: UIPresentationController {
         return view
         }()
     
+    // present开始前
     override func presentationTransitionWillBegin() {
-        // Add the dimming view and the presented view to the heirarchy
-        self.dimmingView.frame = self.containerView.bounds
-        self.dimmingView.frame.origin.x = -self.containerView.bounds.width
-        self.containerView.addSubview(self.dimmingView)
+
+        self.backgroundView.frame = self.containerView.bounds
+        self.backgroundView.frame.origin.x = -self.containerView.bounds.width
+        self.containerView.addSubview(self.backgroundView)
         self.containerView.addSubview(self.presentedView())
         
         // Fade in the dimming view alongside the transition
         if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
+            
             //TODO:学习这个协议
             transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-                self.dimmingView.frame.origin.x = 0
-                self.dimmingView.alpha = 1.0
+                self.backgroundView.frame.origin.x = 0
+                self.backgroundView.alpha = 1.0
                 }, completion:nil)
         }
     }
     
+    // present刚结束
     override func presentationTransitionDidEnd(completed: Bool)  {
-        // If the presentation didn't complete, remove the dimming view
-                if !completed {
-                    self.dimmingView.removeFromSuperview()
-                }
+        
+        if !completed {
+            self.backgroundView.removeFromSuperview()
+        }
+        
     }
     
     override func dismissalTransitionWillBegin()  {
-        // Fade out the dimming view alongside the transition
-                if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
-                    transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-                        self.dimmingView.alpha  = 0.0
-                        self.dimmingView.frame.origin.x = self.dimmingView.bounds.size.width
-                    }, completion:nil)
-                }
+        
+        if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
+            transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+                self.backgroundView.alpha  = 0.0
+                self.backgroundView.frame.origin.x = self.containerView.bounds.size.width
+                }, completion:nil)
+        }
     }
     
+    //消失动画结束需要做的操作
     override func dismissalTransitionDidEnd(completed: Bool) {
-        // If the dismissal completed, remove the dimming view
-                if completed {
-                    self.dimmingView.removeFromSuperview()
-                }
+        if completed {
+            self.backgroundView.removeFromSuperview()
+        }
     }
     
     override func frameOfPresentedViewInContainerView() -> CGRect {
-        // We don't want the presented view to fill the whole container view, so inset it's frame
+
+        // insect of the current view controller's frame
         var frame = self.containerView.bounds;
-        frame = CGRectInset(frame, 50.0, 50.0)
-        
+        frame = CGRectInset(frame, 30.0, 30.0)
         return frame
     }
     
@@ -75,7 +82,7 @@ class MyCustomPresentController: UIPresentationController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
         
         transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-            self.dimmingView.frame = self.containerView.bounds
+            self.backgroundView.frame = self.containerView.bounds
             }, completion:nil)
     }
 }
