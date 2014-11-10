@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D825A3271A10EFE800D67294 /* CustomPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825A3261A10EFE800D67294 /* CustomPresentViewController.swift */; };
+		D825A3291A10F45700D67294 /* MyCustomPresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825A3281A10F45700D67294 /* MyCustomPresentController.swift */; };
+		D825A32B1A10F4A100D67294 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825A32A1A10F4A100D67294 /* CustomPresentationAnimationController.swift */; };
 		D86FE4411A0F989B007BC161 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FE4401A0F989B007BC161 /* AppDelegate.swift */; };
 		D86FE4461A0F989B007BC161 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D86FE4441A0F989B007BC161 /* Main.storyboard */; };
 		D86FE4481A0F989B007BC161 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D86FE4471A0F989B007BC161 /* Images.xcassets */; };
@@ -27,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D825A3261A10EFE800D67294 /* CustomPresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentViewController.swift; sourceTree = "<group>"; };
+		D825A3281A10F45700D67294 /* MyCustomPresentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCustomPresentController.swift; sourceTree = "<group>"; };
+		D825A32A1A10F4A100D67294 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
 		D86FE43B1A0F989B007BC161 /* iOS8Present.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS8Present.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86FE43F1A0F989B007BC161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D86FE4401A0F989B007BC161 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +88,9 @@
 				D86FE4401A0F989B007BC161 /* AppDelegate.swift */,
 				D86FE4601A0F98D4007BC161 /* RootViewController.swift */,
 				D86FE4621A0F98E9007BC161 /* PopoverViewController.swift */,
+				D825A3261A10EFE800D67294 /* CustomPresentViewController.swift */,
+				D825A3281A10F45700D67294 /* MyCustomPresentController.swift */,
+				D825A32A1A10F4A100D67294 /* CustomPresentationAnimationController.swift */,
 				D86FE4441A0F989B007BC161 /* Main.storyboard */,
 				D86FE4471A0F989B007BC161 /* Images.xcassets */,
 				D86FE4491A0F989B007BC161 /* LaunchScreen.xib */,
@@ -216,8 +225,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86FE4611A0F98D4007BC161 /* RootViewController.swift in Sources */,
+				D825A3271A10EFE800D67294 /* CustomPresentViewController.swift in Sources */,
 				D86FE4631A0F98E9007BC161 /* PopoverViewController.swift in Sources */,
+				D825A32B1A10F4A100D67294 /* CustomPresentationAnimationController.swift in Sources */,
 				D86FE4411A0F989B007BC161 /* AppDelegate.swift in Sources */,
+				D825A3291A10F45700D67294 /* MyCustomPresentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +423,7 @@
 				D86FE45C1A0F989B007BC161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D86FE45D1A0F989B007BC161 /* Build configuration list for PBXNativeTarget "iOS8PresentTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +432,7 @@
 				D86FE45F1A0F989B007BC161 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -93,7 +93,16 @@ class RootViewController: UIViewController {
     }
     
     
+    // custom presentation animation in code!
+    @IBAction func customPresentTapped(sender: AnyObject) {
+        
+        let story : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc : CustomPresentViewController = story.instantiateViewControllerWithIdentifier("CustomPresentVCID") as CustomPresentViewController
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
     
-    
+    @IBAction func dismiss(segue: UIStoryboardSegue) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }
