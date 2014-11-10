@@ -67,6 +67,7 @@ class MyCustomPresentController: UIPresentationController {
         }
     }
     
+    // 展示presented vc和presenting vc的边距
     override func frameOfPresentedViewInContainerView() -> CGRect {
 
         // insect of the current view controller's frame
@@ -78,11 +79,11 @@ class MyCustomPresentController: UIPresentationController {
     
     // ---- UIContentContainer protocol methods
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
-        
-        transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-            self.backgroundView.frame = self.containerView.bounds
-            }, completion:nil)
-    }
+//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
+//        
+//        transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+//            self.backgroundView.frame = self.containerView.bounds
+//            }, completion:nil)
+//    }
 }
