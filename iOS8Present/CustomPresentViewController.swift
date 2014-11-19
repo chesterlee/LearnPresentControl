@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomPresentViewController: UIViewController, UIViewControllerTransitioningDelegate {
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.statementInit()
@@ -21,7 +21,6 @@ class CustomPresentViewController: UIViewController, UIViewControllerTransitioni
     }
     
     func statementInit() {
-        
         self.modalPresentationStyle = .Custom
         self.transitioningDelegate = self
     }
@@ -29,11 +28,11 @@ class CustomPresentViewController: UIViewController, UIViewControllerTransitioni
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     // ---- UIViewControllerTransitioningDelegate methods
     // 返回要做present动画前，专门控制其view tree层级的转场控制器
     // presented是将要被present的vc、presenting是做present操作的vc（此时还没展示，所以是空）、source是谁调用的present函数的vc
@@ -69,8 +68,10 @@ class CustomPresentViewController: UIViewController, UIViewControllerTransitioni
             return nil
         }
     }
-
+    
+    
     @IBAction func back(sender: AnyObject) {
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

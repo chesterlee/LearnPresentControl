@@ -16,38 +16,44 @@ class MyCustomPresentController: UIPresentationController {
         // containerView是presented和presenting的view的容器
         
         let view = UIView(frame: self.containerView!.bounds)
-        view.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        view.backgroundColor = UIColor(red: 1.0, green: 1, blue: 0.0, alpha: 0.5)
         view.alpha = 0.0
-        view.frame.origin.x = -view.bounds.size.width
         return view
         }()
     
     // present开始前
     override func presentationTransitionWillBegin() {
 
-        self.backgroundView.frame = self.containerView.bounds
         self.backgroundView.frame.origin.x = -self.containerView.bounds.width
         self.containerView.addSubview(self.backgroundView)
-        self.containerView.addSubview(self.presentedView())
         
-        // Fade in the dimming view alongside the transition
         if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
             
-            //TODO:学习这个协议
             transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+                
+                // 此代码将在animation的动画执行中安插
                 self.backgroundView.frame.origin.x = 0
                 self.backgroundView.alpha = 1.0
                 }, completion:nil)
+            
+            transitionCoordinator.animateAlongsideTransitionInView((view: UIView()), animation: { (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+                // 此代码将在animation的动画执行中安插，手势驱动也会调用
+                println("test1")
+            }, completion: { (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+                println("test2")
+            })
+            
+            transitionCoordinator.notifyWhenInteractionEndsUsingBlock({ (context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+                // 手势驱动结束也会调用
+                println("test3")
+            })
+            
         }
     }
     
     // present刚结束
     override func presentationTransitionDidEnd(completed: Bool)  {
-        
-        if !completed {
-            self.backgroundView.removeFromSuperview()
-        }
-        
+        println("present over")
     }
     
     override func dismissalTransitionWillBegin()  {
@@ -55,16 +61,14 @@ class MyCustomPresentController: UIPresentationController {
         if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
             transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
                 self.backgroundView.alpha  = 0.0
-                self.backgroundView.frame.origin.x = self.containerView.bounds.size.width
+                self.backgroundView.frame.origin.y -= self.containerView.bounds.size.height
                 }, completion:nil)
         }
     }
     
     //消失动画结束需要做的操作
     override func dismissalTransitionDidEnd(completed: Bool) {
-        if completed {
-            self.backgroundView.removeFromSuperview()
-        }
+        
     }
     
     // 展示presented vc和presenting vc的边距
@@ -75,15 +79,4 @@ class MyCustomPresentController: UIPresentationController {
         frame = CGRectInset(frame, 30.0, 30.0)
         return frame
     }
-    
-    
-    // ---- UIContentContainer protocol methods
-    
-//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
-//        
-//        transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-//            self.backgroundView.frame = self.containerView.bounds
-//            }, completion:nil)
-//    }
 }
